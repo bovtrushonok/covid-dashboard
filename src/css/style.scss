@@ -1,0 +1,30 @@
+@mixin flex-template ($direction, $pos, $al) {
+  display: flex;
+  flex-flow: $direction nowrap;
+  justify-content: $pos;
+  align-items: $al;
+}
+
+$color-light: #FFFFFF;
+$color-dark-menu: #CDCDCD;
+$color-light-menu: #FAFAFA;
+$color-light-l: #F6F6F6;
+$color-primary: #FFEB3B;
+$color-primary-light: #FDDCC4;
+$color-dark: #FF9800; 
+$color-fun-pink: #EC407A;
+$color-dark-l: #545454;
+$color-dark-xl: #455A64; 
+
+body {
+  max-height: 100vh;
+  width: 100vw;
+  max-width: 100%;
+  padding: 50px;
+  box-sizing: border-box;
+  margin: 0;
+  color: $color-dark-xl;
+  font-size: 24px;
+  background-image: url('../assets/img/bckgr-main.jpg');
+  background-size: cover;
+}
