@@ -2,10 +2,219 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="../src/css/style.css">
     <title>covid-dashboard</title>
 </head>
 <body>
-    
+    <header>
+        <div class="header-container">
+            <h1 class="dashboard-heading">COVID-19 Dashboard</h1>
+        </div>
+    </header>
+    <main>
+        <div class="main-container">
+            <aside class="global-cases-container">
+                <div class="global-cases">
+                    <h2 class="global-cases__heading">Global Cases</h2>
+                    <p class="global-cases__number">751234785</p>
+                </div>
+                <div class="countries-cases">
+                    <h2 class="countries-cases__heading"><span class="stat-type">Disease</span> cases by </br />country</h2>
+                    <ul class="countries-list">
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Russia</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Belarus</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Russia</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Belarus</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Belarus</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Russia</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Belarus</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Belarus</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Russia</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Belarus</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Belarus</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Russia</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Belarus</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Belarus</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Russia</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Belarus</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Belarus</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Russia</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Belarus</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Belarus</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Russia</span>
+                        </li>
+                        <li class="countries-list__item">
+                            <span class="country-cases-number">10456789</span>
+                            <span class="country-name">Belarus</span>
+                        </li>
+                    </ul>
+                    <div class="mode-switches-block">
+                        <div class="mode-button">
+                            <input type="radio" class="overall-cases-checker mode-switch" value="Diseases" name="list-stat-type" id="Diseases" checked>
+                            <label for="Diseases" class="vertical-menu-label">Diseases</label>
+                        </div>
+                        <div class="mode-button">
+                            <input type="radio" class="death-cases-checker mode-switch" value="Deathes" name="list-stat-type" id="Deathes">
+                            <label for="Deathes" class="vertical-menu-label">Deathes</label>
+                        </div>
+                        <div class="mode-button">
+                            <input type="radio" class="recover-cases-checker mode-switch" value="Recovered" name="list-stat-type" id="Recovered">
+                            <label for="Recovered" class="vertical-menu-label">Recovered</label>
+                        </div>
+                        <div class="mode-button">
+                            <input class="mode-switch " type="checkbox" id="statistic-100k">
+                            <label for="statistic-100k" class="vertical-menu-label">On 100k of population</label>
+                        </div>
+                        <div class="mode-button">
+                            <input class="mode-switch" type="checkbox" id="last-day-stat">
+                            <label for="last-day-stat" class="vertical-menu-label">Statistic for last day </label> 
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <section class="map-container">
+                <div class="map"></div>
+                <div class="mode-switches-block">
+                    <div class="mode-button">
+                        <input type="radio" class="overall-cases-checker mode-switch" value="Diseases" name="map-stat-type" id="Diseases" checked>
+                        <label for="Diseases">Diseases</label>
+                    </div>
+                    <div class="mode-button">
+                        <input type="radio" class="death-cases-checker mode-switch" value="Deathes" name="map-stat-type" id="Deathes">
+                        <label for="Deathes">Deathes</label>
+                    </div>
+                    <div class="mode-button">
+                        <input type="radio" class="recover-cases-checker mode-switch" value="Recovered" name="map-stat-type" id="Recovered">
+                        <label for="Recovered">Recovered</label>
+                    </div>
+                    <div class="mode-button">
+                        <input class="mode-switch" type="checkbox" id="statistic-100k">
+                        <label for="statistic-100k">On 100k of population</label>
+                    </div>
+                    <div class="mode-button">
+                        <input class="mode-switch" type="checkbox" id="last-day-stat">
+                        <label for="last-day-stat">Statistic for last day </label> 
+                    </div>
+                </div>
+            </section>
+            <aside class="statistic-container">
+                <div class="statistic">
+                    <div class="country-description">
+                        <img src="../1200px-Flag_of_Russia.svg.png" class="country-flag" alt="flag">
+                        <span class="country-name">Russia</span>
+                    </div>
+                    <div class="statistical-data">
+                        <div class="disease-cases">
+                            <span class="stat-heading">Disease cases</span>
+                            <div class="category-data">
+                                <span class="all-disease-cases">925648</span>
+                            </div>
+                        </div>
+                        <div class="death-cases">
+                            <span class="stat-heading">Deathes</span>
+                            <div class="category-data">
+                                <span class="all-death-cases">9185</span>   
+                            </div>  
+                        </div>
+                        <div class="recovered-cases">
+                            <span class="stat-heading">Recovered</span>
+                            <div class="category-data">
+                                <span class="all-recovered-cases">625987</span>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="mode-switches-block">
+                        <div class="mode-button">
+                            <input type="radio" class="overall-cases-checker mode-switch" value="Diseases" name="table-stat-type" id="Diseases" checked>
+                            <label for="Diseases" class="vertical-menu-label">Diseases</label>
+                        </div>
+                        <div class="mode-button">
+                            <input type="radio" class="death-cases-checker mode-switch" value="Deathes" name="table-stat-type" id="Deathes">
+                            <label for="Deathes" class="vertical-menu-label">Deathes</label>
+                        </div>
+                        <div class="mode-button">
+                            <input type="radio" class="recover-cases-checker mode-switch" value="Recovered" name="table-stat-type" id="Recovered">
+                            <label for="Recovered" class="vertical-menu-label">Recovered</label>
+                        </div>
+                        <div class="mode-button">
+                            <input class="mode-switch " type="checkbox" id="statistic-100k">
+                            <label for="statistic-100k" class="vertical-menu-label">On 100k of population</label>
+                        </div>
+                        <div class="mode-button">
+                            <input class="mode-switch" type="checkbox" id="last-day-stat">
+                            <label for="last-day-stat" class="vertical-menu-label">Statistic for last day </label> 
+                        </div>
+                    </div>
+                </div>
+                <div class="graphics-block"></div>
+            </aside>
+        </div>
+    </main>  
 </body>
 </html>
