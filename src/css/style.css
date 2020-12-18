@@ -32,6 +32,7 @@ body {
 }
 
 .global-cases {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -52,12 +53,31 @@ body {
 }
 
 .countries-cases {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 5px;
     background: #222222;
     height: 692px;
+}
+
+.spread-icon {
+    display: none;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    width: 15px;
+    height: 15px;
+}
+
+.countries-cases:hover .spread-icon,
+.global-cases:hover .spread-icon, 
+.map-container:hover .spread-icon,
+.statistic:hover .spread-icon,
+.graphics-block:hover .spread-icon {
+    cursor: pointer;
+    display: block;
 }
 
 .countries-cases__heading {
@@ -117,6 +137,7 @@ body {
 }
 
 .map-container {
+    position: relative;
     margin: 5px;
     width: 55%;
 }
@@ -133,6 +154,7 @@ body {
 }
 
 .statistic {
+    position: relative;
     padding: 0.1px;
     width: 100%;
     height: 300px;
@@ -242,6 +264,7 @@ body {
 }
 
 .graphics-block {
+    position: relative;
     margin-top: 5px;
     height: 492px;
     background: #222222;
@@ -255,6 +278,7 @@ body {
 .vertical-menu-label {
     margin-top: 10px;
 }
+
 
 @media screen and (max-width: 1200px) {  
     .global-cases__heading {
