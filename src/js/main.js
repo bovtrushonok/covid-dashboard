@@ -1,7 +1,8 @@
+import createMap from './map_init';
+
 const App = {
   init() {
-    const b = 5;
-    return b;
+    createMap();
   },
 };
 
