@@ -1,4 +1,3 @@
-const countryFlagIcon = document.querySelector('.country-flag');
 const countryName = document.querySelector('.country-name');
 const diseaseCasesNumber = document.querySelector('.all-disease-cases');
 const deathCasesNumber = document.querySelector('.all-death-cases');
@@ -19,6 +18,7 @@ async function getCountryFlag() {
   const flagUrl = 'https://restcountries.eu/rest/v2/all?fields=name;population;flag';
   const flagResponse = await fetch(flagUrl);
   const flagList = await flagResponse.json();
+  const countryFlagIcon = document.querySelector('.country-flag');
 
   let country = flagList.filter((num) => num.name === `${countryName.value}`);
 
