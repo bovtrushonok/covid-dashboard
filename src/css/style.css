@@ -7,6 +7,10 @@ body {
     display: none;
 }
 
+.visible {
+    visibility: visible;
+}
+
 .header-container {
     display: flex;
     align-items: center;
@@ -263,6 +267,13 @@ body {
     margin: 0 7px;
 }
 
+.warning-text {
+    visibility: hidden;
+    color: #ffffff;
+    margin-left: 20px;
+    font-size: 12px;
+}
+
 .graphics-block {
     position: relative;
     margin-top: 5px;
@@ -277,6 +288,30 @@ body {
 
 .vertical-menu-label {
     margin-top: 10px;
+}
+
+.full-screen-window {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+  }
+
+.no-scroll {
+    overflow: hidden;
+}
+
+.full-screen-window .spread-icon {
+    right: 0;
+    top: 0;
+}
+
+.visible {
+    visibility: visible;
 }
 
 
@@ -302,6 +337,12 @@ body {
     }
 
     .mode-switches-block {
+        font-size: 14px;
+    }
+
+    .all-disease-cases,
+    .all-recovered-cases,
+    .all-death-cases {
         font-size: 14px;
     }
 }
@@ -333,6 +374,12 @@ body {
     .statistical-data {
         margin-left: 10px;
         width: 80%;
+    }
+
+    .warning-text {
+        color: #ffffff;
+        margin-left: 10px;
+        font-size: 12px;
     }
 }
 
