@@ -25,6 +25,44 @@ body {
   margin: 0;
   color: $color-dark-xl;
   font-size: 24px;
-  background-image: url('../assets/img/bckgr-main.jpg');
+  //background-image: url('../assets/img/bckgr-main.jpg');
   background-size: cover;
+}
+.countries-list li{
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: solid 1px #CDCDCD;
+  padding: 5px 0;
+  padding-left: 15px;
+  span:first-child{
+    color: #ff0000;
+  }
+  span:last-child{
+    color: #ffffff;
+    margin-left: 5px;
+  }
+  .full-screen-window &{
+    font-size: 22px;
+  }
+}
+
+::-webkit-scrollbar {
+  background-color: rgba(0,0,0,0);
+}
+::-webkit-scrollbar-thumb{
+  border-radius: 0;
+}
+.main-container .full-screen-window {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 100%;
+  z-index: 10;
+}
+.main-container{
+  & .full-screen-window{
+    font-size: 22px;
+  }
 }
