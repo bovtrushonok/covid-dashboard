@@ -1,5 +1,7 @@
 const leftSidebar = document.querySelector('.global-cases-container');
 const imgBtn = document.querySelectorAll('.spread-icon-block');
+const searchConteiner = document.querySelector('.countries-cases');
+const countryUlConteiner = document.querySelector('.countries-list');
 const covidAllUrl = '/v3/covid-19/all';
 const covidCountriesUrl = '/v3/covid-19/countries';
 
@@ -14,6 +16,13 @@ function numberSeparator(num) {
   }
   return str2.trim();
 }
+const searchInput = function searchElement() {
+  const search = document.createElement('input');
+  search.classList.add('search-input');
+  return search;
+};
+searchConteiner.prepend(searchInput());
+
 function addDeads(data) {
   leftSidebar.childNodes[1].lastElementChild.innerText = numberSeparator(data);
 }
@@ -24,11 +33,14 @@ function getCountyData(data, t) {
     const li = document.createElement('li');
     const spanCases = document.createElement('span');
     const spanCounry = document.createElement('span');
+    const flagCounry = document.createElement('img');
+    flagCounry.setAttribute('src', dataSort[i].countryInfo.flag);
     spanCases.innerText = numberSeparator(dataSort[i].cases);
     spanCounry.innerText = dataSort[i].country;
     t.append(li);
-    li.append(spanCases, spanCounry);
+    li.append(flagCounry, spanCases, spanCounry);
   }
+  console.log(dataSort);
 }
 
 async function covidData(url) {
@@ -42,7 +54,7 @@ covidData(covidAllUrl).then((res) => {
 });
 
 covidData(covidCountriesUrl).then((res) => {
-  getCountyData(res, leftSidebar.childNodes[3].childNodes[5]);
+  getCountyData(res, countryUlConteiner);
 });
 
 imgBtn.forEach((item) => {
