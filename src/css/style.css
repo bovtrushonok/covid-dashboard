@@ -194,7 +194,7 @@ body {
 .all-disease-cases,
 .all-recovered-cases,
 .all-death-cases {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .category-data {
@@ -403,7 +403,7 @@ body {
     .all-disease-cases,
     .all-recovered-cases,
     .all-death-cases {
-        font-size: 11px;
+        font-size: 9px;
     }
 
     .statistic-container .mode-switch {

@@ -10,6 +10,11 @@ const statisticWindow = document.querySelector('.statistic');
 const warningText = document.querySelector('.warning-text');
 const pageBody = document.querySelector('body');
 
+function getSeparatedNumber(num) {
+  const n = num.toString();
+  return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, '$1' + ' ');
+}
+
 async function getCountryFlag() {
   const flagUrl = 'https://restcountries.eu/rest/v2/all?fields=name;population;flag';
   const flagResponse = await fetch(flagUrl);
@@ -86,21 +91,21 @@ async function getWorldStatistic() {
   const lastDayRecoveredNumberFor100k = Math.round(lastDayRecoveredNumber / (worldPopulation / 100000));
 
   if (timeIntervalSwitch.checked && relativeValueSwitch.checked) {
-    diseaseCasesNumber.innerHTML = `${lastDayDiseasesNumberFor100k}`;
-    deathCasesNumber.innerHTML = `${lastDayDeathesNumberFor100k}`;
-    recoverCasesNumber.innerHTML = `${lastDayRecoveredNumberFor100k}`;
+    diseaseCasesNumber.innerHTML = `${getSeparatedNumber(lastDayDiseasesNumberFor100k)}`;
+    deathCasesNumber.innerHTML = `${getSeparatedNumber(lastDayDeathesNumberFor100k)}`;
+    recoverCasesNumber.innerHTML = `${getSeparatedNumber(lastDayRecoveredNumberFor100k)}`;
   } else if (timeIntervalSwitch.checked) {
-    diseaseCasesNumber.innerHTML = `${lastDayDiseasesNumber}`;
-    deathCasesNumber.innerHTML = `${lastDayDeathesNumber}`;
-    recoverCasesNumber.innerHTML = `${lastDayRecoveredNumber}`;
+    diseaseCasesNumber.innerHTML = `${getSeparatedNumber(lastDayDiseasesNumber)}`;
+    deathCasesNumber.innerHTML = `${getSeparatedNumber(lastDayDeathesNumber)}`;
+    recoverCasesNumber.innerHTML = `${getSeparatedNumber(lastDayRecoveredNumber)}`;
   } else if (relativeValueSwitch.checked) {
-    diseaseCasesNumber.innerHTML = `${overallDiseasesNumberFor100k}`;
-    deathCasesNumber.innerHTML = `${overallDeathesNumberFor100k}`;
-    recoverCasesNumber.innerHTML = `${overallRecoveredNumberFor100k}`;
+    diseaseCasesNumber.innerHTML = `${getSeparatedNumber(overallDiseasesNumberFor100k)}`;
+    deathCasesNumber.innerHTML = `${getSeparatedNumber(overallDeathesNumberFor100k)}`;
+    recoverCasesNumber.innerHTML = `${getSeparatedNumber(overallRecoveredNumberFor100k)}`;
   } else {
-    diseaseCasesNumber.innerHTML = `${overallDiseasesNumber}`;
-    deathCasesNumber.innerHTML = `${overallDeathesNumber}`;
-    recoverCasesNumber.innerHTML = `${overallRecoveredNumber}`;
+    diseaseCasesNumber.innerHTML = `${getSeparatedNumber(overallDiseasesNumber)}`;
+    deathCasesNumber.innerHTML = `${getSeparatedNumber(overallDeathesNumber)}`;
+    recoverCasesNumber.innerHTML = `${getSeparatedNumber(overallRecoveredNumber)}`;
   }
 }
 
@@ -131,21 +136,21 @@ async function getCountryStatistic() {
   const lastDayRecoveredNumberFor100k = Math.round(lastDayRecoveredNumber / (countryPopulation / 100000));
 
   if (timeIntervalSwitch.checked && relativeValueSwitch.checked) {
-    diseaseCasesNumber.innerHTML = `${lastDayDiseasesNumberFor100k}`;
-    deathCasesNumber.innerHTML = `${lastDayDeathesNumberFor100k}`;
-    recoverCasesNumber.innerHTML = `${lastDayRecoveredNumberFor100k}`;
+    diseaseCasesNumber.innerHTML = `${getSeparatedNumber(lastDayDiseasesNumberFor100k)}`;
+    deathCasesNumber.innerHTML = `${getSeparatedNumber(lastDayDeathesNumberFor100k)}`;
+    recoverCasesNumber.innerHTML = `${getSeparatedNumber(lastDayRecoveredNumberFor100k)}`;
   } else if (timeIntervalSwitch.checked) {
-    diseaseCasesNumber.innerHTML = `${lastDayDiseasesNumber}`;
-    deathCasesNumber.innerHTML = `${lastDayDeathesNumber}`;
-    recoverCasesNumber.innerHTML = `${lastDayRecoveredNumber}`;
+    diseaseCasesNumber.innerHTML = `${getSeparatedNumber(lastDayDiseasesNumber)}`;
+    deathCasesNumber.innerHTML = `${getSeparatedNumber(lastDayDeathesNumber)}`;
+    recoverCasesNumber.innerHTML = `${getSeparatedNumber(lastDayRecoveredNumber)}`;
   } else if (relativeValueSwitch.checked) {
-    diseaseCasesNumber.innerHTML = `${overallDiseasesNumberFor100k}`;
-    deathCasesNumber.innerHTML = `${overallDeathesNumberFor100k}`;
-    recoverCasesNumber.innerHTML = `${overallRecoveredNumberFor100k}`;
+    diseaseCasesNumber.innerHTML = `${getSeparatedNumber(overallDiseasesNumberFor100k)}`;
+    deathCasesNumber.innerHTML = `${getSeparatedNumber(overallDeathesNumberFor100k)}`;
+    recoverCasesNumber.innerHTML = `${getSeparatedNumber(overallRecoveredNumberFor100k)}`;
   } else {
-    diseaseCasesNumber.innerHTML = `${overallDiseasesNumber}`;
-    deathCasesNumber.innerHTML = `${overallDeathesNumber}`;
-    recoverCasesNumber.innerHTML = `${overallRecoveredNumber}`;
+    diseaseCasesNumber.innerHTML = `${getSeparatedNumber(overallDiseasesNumber)}`;
+    deathCasesNumber.innerHTML = `${getSeparatedNumber(overallDeathesNumber)}`;
+    recoverCasesNumber.innerHTML = `${getSeparatedNumber(overallRecoveredNumber)}`;
   }
 }
 
