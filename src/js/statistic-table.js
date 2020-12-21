@@ -11,7 +11,8 @@ const pageBody = document.querySelector('body');
 
 function getSeparatedNumber(num) {
   const n = num.toString();
-  return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, '$1' + ' ');
+  const emptySpace = ' ';
+  return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, `$1 ${emptySpace}`);
 }
 
 async function getCountryFlag() {
@@ -66,9 +67,7 @@ async function getCountryPopulation() {
     country = flagList.filter((num) => num.name === 'United Kingdom of Great Britain and Northern Ireland');
   }
 
-  if (countryName.value) {
-    return country[0].population;
-  }
+  return country[0].population;
 }
 
 async function getWorldStatistic() {
@@ -83,12 +82,18 @@ async function getWorldStatistic() {
   const lastDayDiseasesNumber = statList.todayCases;
   const lastDayDeathesNumber = statList.todayDeaths;
   const lastDayRecoveredNumber = statList.todayRecovered;
-  const overallDiseasesNumberFor100k = Math.round(overallDiseasesNumber / (worldPopulation / 100000));
-  const overallDeathesNumberFor100k = Math.round(overallDeathesNumber / (worldPopulation / 100000));
-  const overallRecoveredNumberFor100k = Math.round(overallRecoveredNumber / (worldPopulation / 100000));
-  const lastDayDiseasesNumberFor100k = Math.round(lastDayDiseasesNumber / (worldPopulation / 100000));
-  const lastDayDeathesNumberFor100k = Math.round(lastDayDeathesNumber / (worldPopulation / 100000));
-  const lastDayRecoveredNumberFor100k = Math.round(lastDayRecoveredNumber / (worldPopulation / 100000));
+  const overallDiseasesNumberFor100k = Math.round(overallDiseasesNumber
+    / (worldPopulation / 100000));
+  const overallDeathesNumberFor100k = Math.round(overallDeathesNumber
+    / (worldPopulation / 100000));
+  const overallRecoveredNumberFor100k = Math.round(overallRecoveredNumber
+    / (worldPopulation / 100000));
+  const lastDayDiseasesNumberFor100k = Math.round(lastDayDiseasesNumber
+    / (worldPopulation / 100000));
+  const lastDayDeathesNumberFor100k = Math.round(lastDayDeathesNumber
+    / (worldPopulation / 100000));
+  const lastDayRecoveredNumberFor100k = Math.round(lastDayRecoveredNumber
+    / (worldPopulation / 100000));
 
   if (timeIntervalSwitch.checked && relativeValueSwitch.checked) {
     diseaseCasesNumber.innerHTML = `${getSeparatedNumber(lastDayDiseasesNumberFor100k)}`;
@@ -128,12 +133,18 @@ async function getCountryStatistic() {
   const lastDayDiseasesNumber = overallDiseasesNumber - increasingStatistic.Confirmed;
   const lastDayDeathesNumber = overallDeathesNumber - increasingStatistic.Deaths;
   const lastDayRecoveredNumber = overallRecoveredNumber - increasingStatistic.Recovered;
-  const overallDiseasesNumberFor100k = Math.round(overallDiseasesNumber / (countryPopulation / 100000));
-  const overallDeathesNumberFor100k = Math.round(overallDeathesNumber / (countryPopulation / 100000));
-  const overallRecoveredNumberFor100k = Math.round(overallRecoveredNumber / (countryPopulation / 100000));
-  const lastDayDiseasesNumberFor100k = Math.round(lastDayDiseasesNumber / (countryPopulation / 100000));
-  const lastDayDeathesNumberFor100k = Math.round(lastDayDeathesNumber / (countryPopulation / 100000));
-  const lastDayRecoveredNumberFor100k = Math.round(lastDayRecoveredNumber / (countryPopulation / 100000));
+  const overallDiseasesNumberFor100k = Math.round(overallDiseasesNumber
+  / (countryPopulation / 100000));
+  const overallDeathesNumberFor100k = Math.round(overallDeathesNumber
+  / (countryPopulation / 100000));
+  const overallRecoveredNumberFor100k = Math.round(overallRecoveredNumber
+  / (countryPopulation / 100000));
+  const lastDayDiseasesNumberFor100k = Math.round(lastDayDiseasesNumber
+  / (countryPopulation / 100000));
+  const lastDayDeathesNumberFor100k = Math.round(lastDayDeathesNumber
+  / (countryPopulation / 100000));
+  const lastDayRecoveredNumberFor100k = Math.round(lastDayRecoveredNumber
+  / (countryPopulation / 100000));
 
   if (timeIntervalSwitch.checked && relativeValueSwitch.checked) {
     diseaseCasesNumber.innerHTML = `${getSeparatedNumber(lastDayDiseasesNumberFor100k)}`;
