@@ -5,20 +5,12 @@ const requestOptions = {
 const { L } = window;
 const Map = L.map('mapBlock').setView([0, 0], 2.3);
 let geoJson;
-const geojsonMarkerOptions = {
-  radius: 10,
-  fillColor: '#ff7800',
-  color: '#000',
-  weight: 1,
-  opacity: 1,
-  fillOpacity: 0.5,
-  riseOnHover: true,
-};
 
-function createHTMLPopUp(country, cases, deaths, recovered, updateTime) {
+function createHTMLPopUp(country, province, cases, deaths, recovered, updateTime) {
+  const currentProvince = (province === null) ? '' : province;
   const html = `
       <span class="icon-marker-tooltip">
-          <h2 class="country-name">${country}</h2>
+          <h2 class="country-name">${country} ${currentProvince}</h2>
           <ul>
             <li><strong>Confirmed:</strong> ${cases}</li>
             <li><strong>Deaths:</strong> ${deaths}</li>
@@ -31,7 +23,7 @@ function createHTMLPopUp(country, cases, deaths, recovered, updateTime) {
 }
 
 function onEachFeature(feature, layer) {
-  layer.bindPopup(createHTMLPopUp(feature.properties.country,
+  layer.bindPopup(createHTMLPopUp(feature.properties.country, feature.properties.province,
     feature.properties.stats.confirmed, feature.properties.stats.deaths,
     feature.properties.stats.recovered, feature.properties.updatedAt));
 }
@@ -80,7 +72,14 @@ export default function createMap() {
     .then((geojson) => {
       L.geoJSON(geojson, {
         pointToLayer(feature, latlng) {
-          return L.circleMarker(latlng, geojsonMarkerOptions);
+          return L.circleMarker(latlng, {
+            radius: 0.02 * (feature.properties.stats.confirmed / 1000),
+            fillColor: 'red',
+            color: '#000',
+            weight: 1,
+            opacity: 0,
+            fillOpacity: 0.5,
+          });
         },
         onEachFeature,
       }).addTo(Map);
