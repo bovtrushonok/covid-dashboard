@@ -132,6 +132,26 @@ body {
     background: #222222;
 }
 
+.icon-marker-tooltip:before {
+    display: block;
+    position: absolute;
+    bottom: 100%;
+    width: 16em;
+    font-size: 1.4em;
+    padding: 0.5em;
+    color: red;
+    border-radius: .4em;
+    margin-bottom: 0.3em;
+    box-shadow: 0 3px 5px rgba(black, .9);
+}  
+
+.country-name {
+    font-size: 1.2em;
+    line-height: 1.2;
+    margin-bottom: .1em;
+    margin-top: 0;
+}
+
 .statistic-container {
     margin-top: 5px;
     width: 29%;

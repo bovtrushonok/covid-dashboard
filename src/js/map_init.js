@@ -3,16 +3,38 @@ const requestOptions = {
   redirect: 'follow',
 };
 const { L } = window;
-const Map = L.map('mapBlock').setView([25, 31], 2.3);
+const Map = L.map('mapBlock').setView([0, 0], 2.3);
 let geoJson;
 const geojsonMarkerOptions = {
-  radius: 5,
+  radius: 10,
   fillColor: '#ff7800',
   color: '#000',
   weight: 1,
   opacity: 1,
   fillOpacity: 0.5,
+  riseOnHover: true,
 };
+
+function createHTMLPopUp(country, cases, deaths, recovered, updateTime) {
+  const html = `
+      <span class="icon-marker-tooltip">
+          <h2 class="country-name">${country}</h2>
+          <ul>
+            <li><strong>Confirmed:</strong> ${cases}</li>
+            <li><strong>Deaths:</strong> ${deaths}</li>
+            <li><strong>Recovered:</strong> ${recovered}</li>
+            <li><strong>Last Update:</strong> ${updateTime}</li>
+          </ul>
+      </span> 
+    `;
+  return html;
+}
+
+function onEachFeature(feature, layer) {
+  layer.bindPopup(createHTMLPopUp(feature.properties.country,
+    feature.properties.stats.confirmed, feature.properties.stats.deaths,
+    feature.properties.stats.recovered, feature.properties.updatedAt));
+}
 
 async function createGeoJSON() {
   const response = await fetch('https://disease.sh/v3/covid-19/jhucsse', requestOptions);
@@ -52,6 +74,7 @@ export default function createMap() {
           };
         }),
       };
+      console.log(geoJson);
       return geoJson;
     })
     .then((geojson) => {
@@ -59,6 +82,7 @@ export default function createMap() {
         pointToLayer(feature, latlng) {
           return L.circleMarker(latlng, geojsonMarkerOptions);
         },
+        onEachFeature,
       }).addTo(Map);
     });
   return Map;
