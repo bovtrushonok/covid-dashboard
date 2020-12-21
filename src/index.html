@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="../src/css/style.css">
+    <script src="../src/js/statistic-table.js" defer></script>
     <title>covid-dashboard</title>
 </head>
 <body>
@@ -80,7 +81,7 @@
                     </div>
                     <div class="mode-button">
                         <input class="mode-switch" type="checkbox" id="last-day-stat">
-                        <label for="last-day-stat">Statistic for last day </label> 
+                        <label for="last-day-stat">Statistic for last day</label> 
                     </div>
                 </div>
             </section>
@@ -90,9 +91,10 @@
                         <img src="../src/css/assets/icons/spread-icon.png" alt="icon" class="spread-icon">  
                     </div>
                     <div class="country-description">
-                        <img src="" class="country-flag" alt="flag">
-                        <span class="country-name"></span>
+                        <img src="" class="country-flag hidden" alt="flag">
+                        <input class="country-name" placeholder="Choose country">
                     </div>
+                    <span class="warning-text">There is no such country, try again</span>
                     <div class="statistical-data">
                         <div class="disease-cases">
                             <span class="stat-heading">Disease cases</span>
@@ -114,18 +116,6 @@
                         </div>
                     </div>
                     <div class="mode-switches-block">
-                        <div class="mode-button">
-                            <input type="radio" class="overall-cases-checker mode-switch" value="Diseases" name="table-stat-type" id="Diseases" checked>
-                            <label for="Diseases" class="vertical-menu-label">Diseases</label>
-                        </div>
-                        <div class="mode-button">
-                            <input type="radio" class="death-cases-checker mode-switch" value="Deathes" name="table-stat-type" id="Deathes">
-                            <label for="Deathes" class="vertical-menu-label">Deathes</label>
-                        </div>
-                        <div class="mode-button">
-                            <input type="radio" class="recover-cases-checker mode-switch" value="Recovered" name="table-stat-type" id="Recovered">
-                            <label for="Recovered" class="vertical-menu-label">Recovered</label>
-                        </div>
                         <div class="mode-button">
                             <input class="mode-switch " type="checkbox" id="statistic-100k">
                             <label for="statistic-100k" class="vertical-menu-label">On 100k of population</label>
