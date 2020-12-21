@@ -23,7 +23,7 @@ function createHTMLPopUp(country, province, cases, deaths, recovered, updateTime
 }
 
 function onEachFeature(feature, layer) {
-  layer.bindPopup(createHTMLPopUp(feature.properties.country, feature.properties.province,
+  layer.bindTooltip(createHTMLPopUp(feature.properties.country, feature.properties.province,
     feature.properties.stats.confirmed, feature.properties.stats.deaths,
     feature.properties.stats.recovered, feature.properties.updatedAt));
 }
@@ -73,12 +73,13 @@ export default function createMap() {
       L.geoJSON(geojson, {
         pointToLayer(feature, latlng) {
           return L.circleMarker(latlng, {
-            radius: 0.02 * (feature.properties.stats.confirmed / 1000),
+            radius: 0.03 * (feature.properties.stats.confirmed / 1000),
             fillColor: 'red',
             color: '#000',
             weight: 1,
             opacity: 0,
             fillOpacity: 0.5,
+            riseOnHover: true,
           });
         },
         onEachFeature,
