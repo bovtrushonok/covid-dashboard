@@ -1,3 +1,7 @@
+const mapSpreadIcon = document.querySelector('.map-container .spread-icon');
+const mapWindow = document.querySelector('.map-container');
+const pageBody = document.querySelector('body');
+
 const { L } = window;
 let geoJson;
 let casesLayer;
@@ -21,7 +25,7 @@ const baseLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{
 
 const Map = L.map('mapBlock', {
   layers: [baseLayer],
-}).setView([0, 0], 2.3);
+}).setView([0, 0], 1);
 
 function createHTMLToolTip(country, parameter, cases, updateTime) {
   const html = `
@@ -236,3 +240,8 @@ createGeoJSON()
 
     L.control.layers(null, overlays).addTo(Map);
   });
+
+mapSpreadIcon.addEventListener('click', () => {
+  mapWindow.classList.toggle('full-screen-window');
+  pageBody.classList.toggle('no-scroll');
+});
