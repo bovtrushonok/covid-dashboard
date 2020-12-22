@@ -33,13 +33,20 @@ body {
   justify-content: flex-start;
   border-bottom: solid 1px #CDCDCD;
   padding: 5px 0;
-  padding-left: 15px;
-  span:first-child{
+  padding-left: 3px;
+  img {
+    width: 26px;
+    height: 16px;
+    margin-right: 5px;
+  }
+  span:nth-child(2){
     color: #ff0000;
+    font-size: 12px;
   }
   span:last-child{
     color: #ffffff;
     margin-left: 5px;
+    font-size: 12px;
   }
   .full-screen-window &{
     font-size: 22px;
@@ -65,4 +72,7 @@ body {
   & .full-screen-window{
     font-size: 22px;
   }
+}
+.search-input {
+  
 }
