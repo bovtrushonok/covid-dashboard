@@ -28,7 +28,7 @@ function createHTMLToolTip(country, parameter, cases, updateTime) {
       <span class="icon-marker-tooltip">
           <h2 class="country-name">${country}</h2>
           <ul>
-            <li><strong>${parameter}:</strong> ${cases}</li>
+            <li><strong>${parameter}:</strong> ${cases.toLocaleString()}</li>
             <li><strong>Last Update:</strong> ${new Date(updateTime).toLocaleDateString('en-US')}</li>
           </ul>
       </span> 
