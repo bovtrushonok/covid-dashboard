@@ -6,6 +6,9 @@ let recoversLayer;
 let todayCasesLayer;
 let todayRecoversLayer;
 let todayDeathsLayer;
+let casesPer100kLayer;
+let deathsPer100kLayer;
+let recoversPer100kLayer;
 
 const baseLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -166,6 +169,57 @@ createGeoJSON()
           feature.properties.todayDeaths, feature.properties.updated));
       },
     });
+    casesPer100kLayer = L.geoJSON(geojson, {
+      pointToLayer(feature, latlng) {
+        return L.circleMarker(latlng, {
+          radius: Math.trunc(0.1 * (feature.properties.casesPerOneMillion / 100)),
+          fillColor: 'red',
+          color: '#000',
+          weight: 1,
+          opacity: 0,
+          fillOpacity: 0.5,
+          riseOnHover: true,
+        });
+      },
+      onEachFeature(feature, layer) {
+        layer.bindTooltip(createHTMLToolTip(feature.properties.country, 'Cases per 100K',
+          feature.properties.casesPerOneMillion / 10, feature.properties.updated));
+      },
+    });
+    deathsPer100kLayer = L.geoJSON(geojson, {
+      pointToLayer(feature, latlng) {
+        return L.circleMarker(latlng, {
+          radius: Math.trunc(0.1 * (feature.properties.deathsPerOneMillion / 10)),
+          fillColor: 'red',
+          color: '#000',
+          weight: 1,
+          opacity: 0,
+          fillOpacity: 0.5,
+          riseOnHover: true,
+        });
+      },
+      onEachFeature(feature, layer) {
+        layer.bindTooltip(createHTMLToolTip(feature.properties.country, 'Deaths per 100K',
+          feature.properties.deathsPerOneMillion / 10, feature.properties.updated));
+      },
+    });
+    recoversPer100kLayer = L.geoJSON(geojson, {
+      pointToLayer(feature, latlng) {
+        return L.circleMarker(latlng, {
+          radius: Math.trunc(0.1 * (feature.properties.recoveredPerOneMillion / 100)),
+          fillColor: 'red',
+          color: '#000',
+          weight: 1,
+          opacity: 0,
+          fillOpacity: 0.5,
+          riseOnHover: true,
+        });
+      },
+      onEachFeature(feature, layer) {
+        layer.bindTooltip(createHTMLToolTip(feature.properties.country, 'Recovers per 100K',
+          feature.properties.recoveredPerOneMillion / 10, feature.properties.updated));
+      },
+    });
   })
   .then(() => {
     const overlays = {
@@ -175,6 +229,9 @@ createGeoJSON()
       'Cases today': todayCasesLayer,
       'Deaths today': todayDeathsLayer,
       'Recovers today': todayRecoversLayer,
+      'Cases per 100K of population': casesPer100kLayer,
+      'Deaths per 100K of population': deathsPer100kLayer,
+      'Recovers per 100K of population': recoversPer100kLayer,
     };
 
     L.control.layers(null, overlays).addTo(Map);
