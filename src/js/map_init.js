@@ -21,23 +21,18 @@ const Map = L.map('mapBlock', {
   layers: [baseLayer],
 }).setView([0, 0], 2.3);
 
-function createHTMLToolTip(country, province, cases, updateTime) {
+function createHTMLToolTip(country, province, parameter, cases, updateTime) {
   const currentProvince = (province === null) ? '' : province;
   const html = `
       <span class="icon-marker-tooltip">
           <h2 class="country-name">${country} ${currentProvince}</h2>
           <ul>
-            <li><strong>Confirmed:</strong> ${cases}</li>
+            <li><strong>${parameter}:</strong> ${cases}</li>
             <li><strong>Last Update:</strong> ${updateTime}</li>
           </ul>
       </span> 
     `;
   return html;
-}
-
-function onEachFeature(feature, layer) {
-  layer.bindTooltip(createHTMLToolTip(feature.properties.country, feature.properties.province,
-    feature.properties.stats.confirmed, feature.properties.updatedAt));
 }
 
 async function createGeoJSON() {
@@ -84,13 +79,16 @@ createGeoJSON()
           riseOnHover: true,
         });
       },
-      onEachFeature,
+      onEachFeature(feature, layer) {
+        layer.bindTooltip(createHTMLToolTip(feature.properties.country, feature.properties.province, 'Cases',
+          feature.properties.stats.confirmed, feature.properties.updatedAt));
+      },
     });
     casesLayer.addTo(Map);
     deathsLayer = L.geoJSON(geojson, {
       pointToLayer(feature, latlng) {
         return L.circleMarker(latlng, {
-          radius: 0.03 * (feature.properties.stats.deaths / 1000),
+          radius: 0.59 * (feature.properties.stats.deaths / 1000),
           fillColor: 'red',
           color: '#000',
           weight: 1,
@@ -99,12 +97,15 @@ createGeoJSON()
           riseOnHover: true,
         });
       },
-      onEachFeature,
+      onEachFeature(feature, layer) {
+        layer.bindTooltip(createHTMLToolTip(feature.properties.country, feature.properties.province, 'Deaths',
+          feature.properties.stats.deaths, feature.properties.updatedAt));
+      },
     });
     recoversLayer = L.geoJSON(geojson, {
       pointToLayer(feature, latlng) {
         return L.circleMarker(latlng, {
-          radius: 0.03 * (feature.properties.stats.recovered / 1000),
+          radius: 0.05 * (feature.properties.stats.recovered / 1000),
           fillColor: 'red',
           color: '#000',
           weight: 1,
@@ -113,7 +114,10 @@ createGeoJSON()
           riseOnHover: true,
         });
       },
-      onEachFeature,
+      onEachFeature(feature, layer) {
+        layer.bindTooltip(createHTMLToolTip(feature.properties.country, feature.properties.province, 'Recovered',
+          feature.properties.stats.recovered, feature.properties.updatedAt));
+      },
     });
   })
   .then(() => {
