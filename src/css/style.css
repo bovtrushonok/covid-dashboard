@@ -1,6 +1,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0 10px;
+    background-color: #222;
 }
 
 .content {
@@ -18,7 +19,7 @@ body {
 .header-container {
     display: flex;
     align-items: center;
-    background: #222222;
+    background: #4e4e4e;
     width: 100%;
     height: 6vh;
     min-height: 40px;
