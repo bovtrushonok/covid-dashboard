@@ -25,7 +25,7 @@ const baseLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{
 
 const Map = L.map('mapBlock', {
   layers: [baseLayer],
-}).setView([0, 0], 1);
+}).setView([0, 0], 2.3);
 
 function createHTMLToolTip(country, parameter, cases, updateTime) {
   const html = `
@@ -74,7 +74,7 @@ createGeoJSON()
       pointToLayer(feature, latlng) {
         return L.circleMarker(latlng, {
           radius: 0.09 * (feature.properties.cases / 10000),
-          fillColor: 'red',
+          fillColor: 'yellow',
           color: '#000',
           weight: 1,
           opacity: 0,
@@ -109,7 +109,7 @@ createGeoJSON()
       pointToLayer(feature, latlng) {
         return L.circleMarker(latlng, {
           radius: 0.09 * (feature.properties.recovered / 10000),
-          fillColor: 'red',
+          fillColor: 'blue',
           color: '#000',
           weight: 1,
           opacity: 0,
@@ -126,7 +126,7 @@ createGeoJSON()
       pointToLayer(feature, latlng) {
         return L.circleMarker(latlng, {
           radius: 0.09 * (feature.properties.todayCases / 100),
-          fillColor: 'red',
+          fillColor: 'yellow',
           color: '#000',
           weight: 1,
           opacity: 0,
@@ -143,7 +143,7 @@ createGeoJSON()
       pointToLayer(feature, latlng) {
         return L.circleMarker(latlng, {
           radius: 0.09 * (feature.properties.todayRecovered / 100),
-          fillColor: 'red',
+          fillColor: 'blue',
           color: '#000',
           weight: 1,
           opacity: 0,
@@ -177,7 +177,7 @@ createGeoJSON()
       pointToLayer(feature, latlng) {
         return L.circleMarker(latlng, {
           radius: Math.trunc(0.1 * (feature.properties.casesPerOneMillion / 100)),
-          fillColor: 'red',
+          fillColor: 'yellow',
           color: '#000',
           weight: 1,
           opacity: 0,
@@ -211,7 +211,7 @@ createGeoJSON()
       pointToLayer(feature, latlng) {
         return L.circleMarker(latlng, {
           radius: Math.trunc(0.1 * (feature.properties.recoveredPerOneMillion / 100)),
-          fillColor: 'red',
+          fillColor: 'blue',
           color: '#000',
           weight: 1,
           opacity: 0,
@@ -239,6 +239,22 @@ createGeoJSON()
     };
 
     L.control.layers(null, overlays).addTo(Map);
+  })
+  .then(() => {
+    const legend = L.control({ position: 'bottomright' });
+
+    legend.onAdd = () => {
+      const div = L.DomUtil.create('div', 'info legend');
+      const grades = [10, 100, 1000, 10000, 100000];
+
+      for (let i = 0; i < grades.length; i += 1) {
+        div.innerHTML += `<div><i style="width:${(i + 1) * 3}px; height:${(i + 1) * 3}px">
+          </i>${grades[i]} - ${(grades[i + 1] ? grades[i + 1] : 'more')}</div>`;
+      }
+      return div;
+    };
+
+    legend.addTo(Map);
   });
 
 mapSpreadIcon.addEventListener('click', () => {

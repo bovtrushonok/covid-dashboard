@@ -132,6 +132,20 @@ body {
     background: #222222;
 }
 
+.legend {
+    width: 16em;
+    line-height: 37px;
+    color: #555;
+}
+.legend i {
+    border-radius: 100%;
+    color: red;
+    background-color: red;
+    float: left;
+    margin-right: 18px;
+    opacity: 0.7;
+}
+
 .icon-marker-tooltip {
     display: block;
     position: absolute;
