@@ -67,8 +67,6 @@ const chartConfig = {
 };
 const myChart = new Chart(canvas, chartConfig);
 
-console.log(myChart);
-
 function setData(data, name, color) {
   const obj = {
     label: name,
@@ -86,16 +84,13 @@ covid(covidDataBase).then((res) => {
   myChart.data.datasets = [(setData(res.cases, 'cases', 'yellow'))];
   myChart.update();
 });
-covid('/v3/covid-19/historical/usa?lastdays=all').then((res) => {
-  console.log(res);
-});
+
 let y = 0;
 
 grafickBlock.addEventListener('click', (e) => {
   const displayBlock = document.querySelector('.display-panel');
   if (e.target.className === 'panel-right-btn') {
     y = (y += 1) % arrMode.length;
-    console.log(dataObj[arrMode[y]]);
     myChart.data.datasets = [setData(dataObj[arrMode[y]], arrMode[y], 'yellow')];
     myChart.update();
     displayBlock.innerText = arrMode[y];
@@ -103,14 +98,8 @@ grafickBlock.addEventListener('click', (e) => {
   if (e.target.className === 'panel-left-btn') {
     y = y === 0 ? 3 : y;
     y = Math.abs((y -= 1) % arrMode.length);
-    console.log(y);
     myChart.data.datasets = [setData(dataObj[arrMode[y]], arrMode[y], 'yellow')];
     myChart.update();
     displayBlock.innerText = arrMode[y];
   }
-  if (dataObj !== null) {
-    console.log(dataObj);
-  }
-  console.log(arrMode[y]);
-  console.log(e.target.className);
 });
