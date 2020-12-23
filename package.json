@@ -29,6 +29,7 @@
     "cssnano": "^4.1.10",
     "del-cli": "^3.0.1",
     "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-loader": "^3.0.4",
     "eslint-plugin-import": "^2.18.2",

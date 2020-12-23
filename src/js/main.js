@@ -4,5 +4,3 @@ const App = {
     return b;
   },
 };
-
-export default App;
