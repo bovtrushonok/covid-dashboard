@@ -1,6 +1,6 @@
 const App = {
   init() {
-    const b = 5;
+    const b = 0;
     return b;
   },
 };
