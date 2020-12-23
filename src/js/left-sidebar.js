@@ -1,3 +1,5 @@
+import myChart from './grafic';
+
 const leftSidebar = document.querySelector('.global-cases-container');
 const imgBtn = document.querySelectorAll('.spread-icon-block');
 const searchConteiner = document.querySelector('.countries-cases');
@@ -34,6 +36,12 @@ const searchInput = function searchElement() {
   search.setAttribute('placeholder', 'choose country');
   return search;
 };
+
+async function covidData(url) {
+  const response = await fetch(`https://disease.sh${url}`);
+  const result = await response.json();
+  return result;
+}
 searchConteiner.prepend(searchInput());
 
 function addDeads(data) {
@@ -104,6 +112,37 @@ function setMode() {
     one100people = 1;
   }
 }
+const arrMode2 = ['deaths', 'cases', 'recovered'];
+let p = 0;
+let dataObj = null;
+const arena = document.querySelector('.graphics-block');
+
+function clickListCountry(e) {
+  arena.addEventListener('click', (z) => {
+    const displayBlock = document.querySelector('.display-panel');
+
+    if (z.target.className === 'panel-right-btn') {
+      p = (p += 1) % arrMode2.length;
+      myChart.data.datasets[0].data = [...Object.values(dataObj.timeline[arrMode2[p]])];
+      myChart.update();
+      displayBlock.innerText = arrMode2[p];
+    }
+    if (z.target.className === 'panel-left-btn') {
+      p = p === 0 ? 3 : p;
+      p = Math.abs((p -= 1) % arrMode2.length);
+      myChart.data.datasets[0].data = [...Object.values(dataObj.timeline[arrMode2[p]])];
+      myChart.update();
+      displayBlock.innerText = arrMode2[p];
+    }
+  });
+  const valueCountry = e.path[1].lastChild.innerText;
+  const url1 = `/v3/covid-19/historical/${valueCountry}?lastdays=all`;
+  covidData(url1).then((res) => {
+    dataObj = res;
+    myChart.data.datasets[0].data = [...Object.values(res.timeline.cases)];
+    myChart.update();
+  });
+}
 
 function getCountyData(data, t) {
   setMode();
@@ -126,13 +165,8 @@ function getCountyData(data, t) {
     spanCounry.innerText = dataSort[i].country;
     t.append(li);
     li.append(flagCounry, spanCases, spanCounry);
+    li.addEventListener('click', clickListCountry);
   }
-}
-
-async function covidData(url) {
-  const response = await fetch(`https://disease.sh${url}`);
-  const result = await response.json();
-  return result;
 }
 
 covidData(covidAllUrl).then((res) => {
