@@ -245,11 +245,11 @@ createGeoJSON()
 
     legend.onAdd = () => {
       const div = L.DomUtil.create('div', 'info legend');
-      const grades = [10, 100, 1000, 10000, 100000];
+      const grades = [100, 1000, 10000, 100000, 1000000];
 
       for (let i = 0; i < grades.length; i += 1) {
-        div.innerHTML += `<div><i style="width:${(i + 1) * 3}px; height:${(i + 1) * 3}px">
-          </i>${grades[i]} - ${(grades[i + 1] ? grades[i + 1] : 'more')}</div>`;
+        div.innerHTML += `<div class="legend-list"><i class="i-marker" style="width:${(i + 1) * 3}px; height:${(i + 1) * 3}px">
+          </i><span>${grades[i]} - ${(grades[i + 1] ? grades[i + 1] : 'more')}</span></div>`;
       }
       return div;
     };
