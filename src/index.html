@@ -14,10 +14,11 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
-    <script src="../src/js/statistic-table.js" defer></script>
+    <script src="../dist/index.js" defer></script>
     <title>covid-dashboard</title>
 </head>
 <body>
+    <div class="content">
     <header>
         <div class="header-container">
             <h1 class="dashboard-heading">COVID-19 Dashboard</h1>
@@ -37,7 +38,7 @@
                     <div class="spread-icon-block">
                         <img src="../src/css/assets/icons/spread-icon.png" alt="icon" class="spread-icon">  
                     </div>
-                    <h2 class="countries-cases__heading"><span class="stat-type">Disease</span> cases by </br />country</h2>
+                    <h2 class="countries-cases__heading">Cases by country</h2>
                     <ul class="countries-list">
                     </ul>
                     <div class="mode-switches-block">
@@ -69,47 +70,47 @@
                     <img src="../src/css/assets/icons/spread-icon.png" alt="icon" class="spread-icon">  
                 </div>
                 <div class="map" id="mapBlock"></div>
-                <div class="mode-switches-block">
-                </div>
             </section>
             <aside class="statistic-container">
                 <div class="statistic">
                     <div class="spread-icon-block">
                         <img src="../src/css/assets/icons/spread-icon.png" alt="icon" class="spread-icon">  
                     </div>
-                    <div class="country-description">
-                        <img src="" class="country-flag hidden" alt="flag">
-                        <input class="country-name" placeholder="Choose country">
-                    </div>
-                    <span class="warning-text">There is no such country, try again</span>
-                    <div class="statistical-data">
-                        <div class="disease-cases">
-                            <span class="stat-heading">Disease cases</span>
-                            <div class="category-data">
-                                <span class="all-disease-cases"></span>
+                    <div class="statistic-content">
+                        <div class="country-description">
+                            <img src="" class="country-flag hidden" alt="flag">
+                            <input class="country-name" placeholder="Choose country">
+                        </div>
+                        <span class="warning-text">There is no such country, try again</span>
+                        <div class="statistical-data">
+                            <div class="disease-cases">
+                                <span class="stat-heading">Disease cases</span>
+                                <div class="category-data">
+                                    <span class="all-disease-cases"></span>
+                                </div>
+                            </div>
+                            <div class="death-cases">
+                                <span class="stat-heading">Deathes</span>
+                                <div class="category-data">
+                                    <span class="all-death-cases"></span>   
+                                </div>  
+                            </div>
+                            <div class="recovered-cases">
+                                <span class="stat-heading">Recovered</span>
+                                <div class="category-data">
+                                    <span class="all-recovered-cases"></span>
+                                </div> 
                             </div>
                         </div>
-                        <div class="death-cases">
-                            <span class="stat-heading">Deathes</span>
-                            <div class="category-data">
-                                <span class="all-death-cases"></span>   
-                            </div>  
-                        </div>
-                        <div class="recovered-cases">
-                            <span class="stat-heading">Recovered</span>
-                            <div class="category-data">
-                                <span class="all-recovered-cases"></span>
-                            </div> 
-                        </div>
-                    </div>
-                    <div class="mode-switches-block">
-                        <div class="mode-button">
-                            <input class="mode-switch " type="checkbox" id="statistic-100k">
-                            <label for="statistic-100k" class="vertical-menu-label">On 100k of population</label>
-                        </div>
-                        <div class="mode-button">
-                            <input class="mode-switch" type="checkbox" id="last-day-stat">
-                            <label for="last-day-stat" class="vertical-menu-label">Statistic for last day </label> 
+                        <div class="mode-switches-block">
+                            <div class="mode-button">
+                                <input class="mode-switch " type="checkbox" id="statistic-100k">
+                                <label for="statistic-100k" class="vertical-menu-label">On 100k of population</label>
+                            </div>
+                            <div class="mode-button">
+                                <input class="mode-switch" type="checkbox" id="last-day-stat">
+                                <label for="last-day-stat" class="vertical-menu-label">Statistic for last day </label> 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -120,6 +121,20 @@
                 </div>
             </aside>
         </div>
-    </main>  
+    </main>
+    <footer>
+        <div class="footer-content">
+            <p class="footer-content-text">Made by 
+                <a href="https://github.com/bovtrushonok" class="github-link" target="_blank">@bovtrushonok</a>,
+                <a href="https://github.com/kostik4kg" class="github-link" target="_blank">@kostik4kg</a>,
+                <a href="https://github.com/tonykosmos" class="github-link" target="_blank">@tonykosmos</a>
+            </p>
+            <a href="https://rs.school/js/">
+              <img src="../src/css/assets/icons/rs_school_js.svg" alt="rs-school-logo" class="footer-logo">
+            </a>
+            <p class="footer-content-text">2020</p>
+          </div>
+    </footer> 
+</div> 
 </body>
 </html>

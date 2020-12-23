@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 import myChart from './grafic';
+=======
+import { getCountryFlag, getCountryStatistic } from './statistic-table';
+>>>>>>> 8b3e13a1b1f65d8698bb246a11436f6a349e600b
 
 const leftSidebar = document.querySelector('.global-cases-container');
 const imgBtn = document.querySelectorAll('.spread-icon-block');
 const searchConteiner = document.querySelector('.countries-cases');
 const countryUlConteiner = document.querySelector('.countries-list');
+const countryName = document.querySelector('.country-name');
 const state = {
   mode: 'Diseases',
   modeName: ['cases', 'deaths', 'recovered', 'casesPerOneMillion', 'deathsPerOneMillion', 'recoveredPerOneMillion', 'todayCases', 'todayDeaths', 'todayRecovered'],
@@ -165,7 +170,15 @@ function getCountyData(data, t) {
     spanCounry.innerText = dataSort[i].country;
     t.append(li);
     li.append(flagCounry, spanCases, spanCounry);
+<<<<<<< HEAD
     li.addEventListener('click', clickListCountry);
+=======
+    li.addEventListener('click', () => {
+      countryName.value = spanCounry.innerText;
+      getCountryFlag();
+      getCountryStatistic();
+    });
+>>>>>>> 8b3e13a1b1f65d8698bb246a11436f6a349e600b
   }
 }
 

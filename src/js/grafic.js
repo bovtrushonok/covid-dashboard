@@ -85,6 +85,10 @@ covid(covidDataBase).then((res) => {
   myChart.data.datasets = [(setData(res.cases, 'cases', 'yellow'))];
   myChart.update();
 });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8b3e13a1b1f65d8698bb246a11436f6a349e600b
 let y = 0;
 
 grafickBlock.addEventListener('click', (e) => {

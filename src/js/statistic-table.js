@@ -15,7 +15,7 @@ function getSeparatedNumber(num) {
   return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, `$1 ${emptySpace}`);
 }
 
-async function getCountryFlag() {
+export async function getCountryFlag() {
   const flagUrl = 'https://restcountries.eu/rest/v2/all?fields=name;population;flag';
   const flagResponse = await fetch(flagUrl);
   const flagList = await flagResponse.json();
@@ -114,7 +114,7 @@ async function getWorldStatistic() {
   }
 }
 
-async function getCountryStatistic() {
+export async function getCountryStatistic() {
   if (!countryName.value) {
     getWorldStatistic();
     return;
