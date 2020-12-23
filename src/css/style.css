@@ -153,6 +153,58 @@ body {
     background: #222222;
 }
 
+.legend {
+    width: 16em;
+    line-height: 37px;
+    color: #555;
+}
+
+.legend-list {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.legend .i-marker {
+    border-radius: 100%;
+    color: red;
+    background-color: yellow;
+    float: left;
+    margin-right: 2px;
+    opacity: 0.7;
+}
+
+.icon-marker-tooltip {
+    display: block;
+    position: absolute;
+    bottom: 100%;
+    font-size: 1.4em;
+    padding: 0.5em;
+    color: black;
+    background-color: darkgrey;
+    border-radius: .4em;
+    margin-bottom: 0.3em;
+    box-shadow: 0 3px 5px rgba(black, .9);
+}  
+
+.icon-marker-tooltip:before {
+    display: block;
+    position: absolute;
+    bottom: 100%;
+    font-size: 1.4em;
+    padding: 0.5em;
+    color: red;
+    border-radius: .4em;
+    margin-bottom: 0.3em;
+    box-shadow: 0 3px 5px rgba(black, .9);
+}  
+
+.country-name {
+    font-size: 1.2em;
+    color: black;
+    line-height: 1.2;
+    margin: 0 auto 0.1em;
+}
+
 .statistic-container {
     margin-top: 5px;
     width: 29%;
@@ -311,10 +363,10 @@ body {
     top: 0;
 }
 
+
 .visible {
     visibility: visible;
 }
-
 
 @media screen and (max-width: 1200px) {  
     .global-cases__heading {

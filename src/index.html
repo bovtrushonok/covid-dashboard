@@ -7,6 +7,12 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="../src/css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
     <script src="../src/js/statistic-table.js" defer></script>
     <title>covid-dashboard</title>
 </head>
@@ -61,28 +67,8 @@
                 <div class="spread-icon-block">
                     <img src="../src/css/assets/icons/spread-icon.png" alt="icon" class="spread-icon">  
                 </div>
-                <div class="map"></div>
+                <div class="map" id="mapBlock"></div>
                 <div class="mode-switches-block">
-                    <div class="mode-button">
-                        <input type="radio" class="overall-cases-checker mode-switch" value="Diseases" name="map-stat-type" id="Diseases" checked>
-                        <label for="Diseases">Diseases</label>
-                    </div>
-                    <div class="mode-button">
-                        <input type="radio" class="death-cases-checker mode-switch" value="Deathes" name="map-stat-type" id="Deathes">
-                        <label for="Deathes">Deathes</label>
-                    </div>
-                    <div class="mode-button">
-                        <input type="radio" class="recover-cases-checker mode-switch" value="Recovered" name="map-stat-type" id="Recovered">
-                        <label for="Recovered">Recovered</label>
-                    </div>
-                    <div class="mode-button">
-                        <input class="mode-switch" type="checkbox" id="statistic-100k">
-                        <label for="statistic-100k">On 100k of population</label>
-                    </div>
-                    <div class="mode-button">
-                        <input class="mode-switch" type="checkbox" id="last-day-stat">
-                        <label for="last-day-stat">Statistic for last day</label> 
-                    </div>
                 </div>
             </section>
             <aside class="statistic-container">
