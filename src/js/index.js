@@ -4,3 +4,4 @@ import '../css/style.scss';
 import './left-sidebar';
 import './statistic-table';
 // window.addEventListener('load', App.init());
+import './grafic';

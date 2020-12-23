@@ -48,6 +48,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "chart.js": "^2.9.4",
     "core-js": "^3.8.1",
     "regenerator-runtime": "^0.13.7"
   }

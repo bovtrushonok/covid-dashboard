@@ -33,13 +33,20 @@ body {
   justify-content: flex-start;
   border-bottom: solid 1px #CDCDCD;
   padding: 5px 0;
-  padding-left: 15px;
-  span:first-child{
+  padding-left: 3px;
+  img {
+    width: 26px;
+    height: 16px;
+    margin-right: 5px;
+  }
+  span:nth-child(2){
     color: #ff0000;
+    font-size: 12px;
   }
   span:last-child{
     color: #ffffff;
     margin-left: 5px;
+    font-size: 12px;
   }
   .full-screen-window &{
     font-size: 22px;
@@ -65,4 +72,38 @@ body {
   & .full-screen-window{
     font-size: 22px;
   }
+}
+.graphics-block canvas{
+  width: 100%;
+  height: auto;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.panel-controll {
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+}
+.panel-right-btn, .panel-left-btn {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+.panel-right-btn{
+  background: linear-gradient(45deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0) 50%,  #808080 50%);
+  transform: rotate(45deg);
+}
+.panel-left-btn {
+  background: linear-gradient(45deg,#808080 0%, #808080 50%,  rgba(255,255,255,0) 50%);
+  transform: rotate(45deg);
+}
+.search-input{
+    width: 90%;
+    background-color: #222;
+    border-radius: 9px;
+    height: 30px;
+    margin: 2px;
+    padding-left: 5px;
+    font-size: 16px;
 }
