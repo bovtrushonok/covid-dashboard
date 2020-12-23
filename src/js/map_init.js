@@ -66,7 +66,6 @@ createGeoJSON()
         };
       }),
     };
-    console.log(geoJson);
     return geoJson;
   })
   .then((geojson) => {
