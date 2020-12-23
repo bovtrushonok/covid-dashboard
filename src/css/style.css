@@ -398,7 +398,9 @@ body {
     min-height: 45px;
   }
 
-
+  .full-screen-window .leaflet-container {
+      margin-left: -5px;
+  }
 
 .no-scroll {
     overflow: hidden;
@@ -414,6 +416,7 @@ body {
 .visible {
     visibility: visible;
 }
+
 .countries-list li {
   display: flex;
   justify-content: flex-start;
@@ -421,20 +424,29 @@ body {
   padding: 5px 0;
   padding-left: 3px;
 }
+
+.countries-list li:hover {
+    cursor: pointer;
+    background: #444343;
+}
+
 .countries-list li img {
   width: 26px;
   height: 16px;
   margin-right: 5px;
 }
+
 .countries-list li span:nth-child(2) {
   color: #ff0000;
   font-size: 12px;
 }
+
 .countries-list li span:last-child {
   color: #ffffff;
   margin-left: 5px;
   font-size: 12px;
 }
+
 .full-screen-window .countries-list li {
   font-size: 22px;
 }
@@ -646,4 +658,3 @@ padding-bottom: 1px;
         font-size: 10px;
     }
 }
-

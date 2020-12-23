@@ -1,7 +1,10 @@
+import { getCountryFlag, getCountryStatistic } from './statistic-table';
+
 const leftSidebar = document.querySelector('.global-cases-container');
 const imgBtn = document.querySelectorAll('.spread-icon-block');
 const searchConteiner = document.querySelector('.countries-cases');
 const countryUlConteiner = document.querySelector('.countries-list');
+const countryName = document.querySelector('.country-name');
 const state = {
   mode: 'Diseases',
   modeName: ['cases', 'deaths', 'recovered', 'casesPerOneMillion', 'deathsPerOneMillion', 'recoveredPerOneMillion', 'todayCases', 'todayDeaths', 'todayRecovered'],
@@ -126,6 +129,11 @@ function getCountyData(data, t) {
     spanCounry.innerText = dataSort[i].country;
     t.append(li);
     li.append(flagCounry, spanCases, spanCounry);
+    li.addEventListener('click', () => {
+      countryName.value = spanCounry.innerText;
+      getCountryFlag();
+      getCountryStatistic();
+    });
   }
 }
 
