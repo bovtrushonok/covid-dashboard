@@ -31,6 +31,7 @@ function numberSeparator(num) {
 const searchInput = function searchElement() {
   const search = document.createElement('input');
   search.classList.add('search-input');
+  search.setAttribute('placeholder', 'choose country');
   return search;
 };
 searchConteiner.prepend(searchInput());
