@@ -99,7 +99,7 @@ chartBlock.addEventListener('click', (e) => {
     displayBlock.innerText = arrMode[y];
   }
   if (e.target.className === 'panel-left-btn') {
-    y = y === 0 ? 3 : y;
+    y = y === 0 ? arrMode.length : y;
     y = Math.abs((y -= 1) % arrMode.length);
     myChart.data.datasets = [setData(dataObj[arrMode[y]], arrMode[y], 'yellow')];
     myChart.update();
