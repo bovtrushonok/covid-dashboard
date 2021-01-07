@@ -1,6 +1,6 @@
 import Chart from 'chart.js';
 
-const grafickBlock = document.querySelector('.graphics-block');
+const chartBlock = document.querySelector('.graphics-block');
 const canvas = document.createElement('canvas');
 
 canvas.setAttribute('id', 'myChart');
@@ -25,9 +25,9 @@ const controlBtn = function createControlBtn(str) {
 const arrMode = ['deaths', 'cases', 'recovered'];
 const covidDataBase = '/v3/covid-19/historical/all?lastdays=all';
 
-grafickBlock.append(canvas, controlBtn('deads'));
+chartBlock.append(canvas, controlBtn('deads'));
 
-async function covid(url) {
+async function getDataOnCovid(url) {
   const response = await fetch(`https://disease.sh${url}`);
   const result = await response.json();
   return result;
@@ -79,8 +79,9 @@ function setData(data, name, color) {
   };
   return obj;
 }
+
 let dataObj = null;
-covid(covidDataBase).then((res) => {
+getDataOnCovid(covidDataBase).then((res) => {
   dataObj = res;
   arrData = Object.keys(res.cases).map((item) => new Date(item));
   myChart.data.labels = Object.keys(res.cases);
@@ -89,7 +90,7 @@ covid(covidDataBase).then((res) => {
 });
 let y = 0;
 
-grafickBlock.addEventListener('click', (e) => {
+chartBlock.addEventListener('click', (e) => {
   const displayBlock = document.querySelector('.display-panel');
   if (e.target.className === 'panel-right-btn') {
     y = (y += 1) % arrMode.length;
