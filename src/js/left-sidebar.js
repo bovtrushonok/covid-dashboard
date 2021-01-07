@@ -13,8 +13,8 @@ const state = {
   lastDayStat: false,
 };
 
-const covidAllUrl = '/v3/covid-19/all';
-const covidCountriesUrl = '/v3/covid-19/countries';
+const covid_all_url = '/v3/covid-19/all';
+const covid_countries_url = '/v3/covid-19/countries';
 
 const checkbox = document.querySelectorAll('div.countries-cases > div.mode-switches-block > div.mode-button > input.mode-switch');
 
@@ -177,18 +177,18 @@ function getCountyData(data, t) {
   }
 }
 
-covidData(covidAllUrl).then((res) => {
+covidData(covid_all_url).then((res) => {
   addDeads(res.cases);
 });
 
-covidData(covidCountriesUrl).then((res) => {
+covidData(covid_countries_url).then((res) => {
   getCountyData(res, countryUlConteiner);
 });
 
 async function showValue() {
   async function searchValue() {
     // eslint-disable-next-line no-unused-expressions
-    countries = await covidData(covidCountriesUrl).then((res) => res);
+    countries = await covidData(covid_countries_url).then((res) => res);
   }
   await searchValue();
   countryUlConteiner.innerHTML = '';
@@ -219,7 +219,7 @@ checkbox.forEach((item) => {
       state.lastDayStat = e.target.checked;
     }
     countryUlConteiner.innerHTML = '';
-    await covidData(covidCountriesUrl).then((res) => {
+    await covidData(covid_countries_url).then((res) => {
       getCountyData(res, countryUlConteiner);
     });
   });
