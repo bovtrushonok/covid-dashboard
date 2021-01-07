@@ -182,8 +182,8 @@ body {
 
 .legend .i-marker {
     border-radius: 100%;
-    color: red;
-    background-color: yellow;
+    color: #ff0000;
+    background-color: #ffff00;
     float: left;
     margin-right: 2px;
     opacity: 0.7;
