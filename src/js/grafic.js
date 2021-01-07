@@ -2,28 +2,30 @@ import Chart from 'chart.js';
 
 const grafickBlock = document.querySelector('.graphics-block');
 const canvas = document.createElement('canvas');
+
 canvas.setAttribute('id', 'myChart');
 
-const controllBtn = function createControllBtn(str) {
-  const controll = document.createElement('div');
+const controlBtn = function createControlBtn(str) {
+  const control = document.createElement('div');
   const rightBtn = document.createElement('div');
   const leftBtn = document.createElement('div');
   const display = document.createElement('div');
   const displayValue = str;
+
   display.innerText = displayValue;
-  controll.classList.add('panel-controll');
+  control.classList.add('panel-control');
   rightBtn.classList.add('panel-right-btn');
   leftBtn.classList.add('panel-left-btn');
   display.classList.add('display-panel');
-  controll.append(leftBtn, display, rightBtn);
+  control.append(leftBtn, display, rightBtn);
 
-  return controll;
+  return control;
 };
 
 const arrMode = ['deaths', 'cases', 'recovered'];
 const covidDataBase = '/v3/covid-19/historical/all?lastdays=all';
 
-grafickBlock.append(canvas, controllBtn('deads'));
+grafickBlock.append(canvas, controlBtn('deads'));
 
 async function covid(url) {
   const response = await fetch(`https://disease.sh${url}`);
