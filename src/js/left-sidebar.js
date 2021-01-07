@@ -1,4 +1,4 @@
-import myChart from './grafic';
+import myChart from './covidCharts';
 import { getCountryFlag, getCountryStatistic } from './statistic-table';
 
 const leftSidebar = document.querySelector('.global-cases-container');
@@ -13,8 +13,8 @@ const state = {
   lastDayStat: false,
 };
 
-const covid_all_url = '/v3/covid-19/all';
-const covid_countries_url = '/v3/covid-19/countries';
+const COVID_ALL_URL = '/v3/covid-19/all';
+const COVID_COUNTRIES_URL = '/v3/covid-19/countries';
 
 const checkbox = document.querySelectorAll('div.countries-cases > div.mode-switches-block > div.mode-button > input.mode-switch');
 
@@ -36,6 +36,7 @@ const searchInput = function searchElement() {
   const search = document.createElement('input');
   search.classList.add('search-input');
   search.setAttribute('placeholder', 'choose country');
+
   return search;
 };
 
@@ -46,7 +47,7 @@ async function covidData(url) {
 }
 searchConteiner.prepend(searchInput());
 
-function addDeads(data) {
+function addDeathData(data) {
   leftSidebar.childNodes[1].lastElementChild.innerText = numberSeparator(data);
 }
 let modeNameStatus = '';
@@ -114,33 +115,33 @@ function setMode() {
     one100people = 1;
   }
 }
-const arrMode2 = ['deaths', 'cases', 'recovered'];
+const arrayModeName = ['deaths', 'cases', 'recovered'];
 let p = 0;
-let dataObj = null;
+let dataCovidObj = null;
 const arena = document.querySelector('.graphics-block');
 
 function clickListCountry(e) {
-  arena.addEventListener('click', (z) => {
+  arena.addEventListener('click', (event) => {
     const displayBlock = document.querySelector('.display-panel');
 
-    if (z.target.className === 'panel-right-btn') {
-      p = (p += 1) % arrMode2.length;
-      myChart.data.datasets[0].data = [...Object.values(dataObj.timeline[arrMode2[p]])];
+    if (event.target.className === 'panel-right-btn') {
+      p = (p += 1) % arrayModeName.length;
+      myChart.data.datasets[0].data = [...Object.values(dataCovidObj.timeline[arrayModeName[p]])];
       myChart.update();
-      displayBlock.innerText = arrMode2[p];
+      displayBlock.innerText = arrayModeName[p];
     }
-    if (z.target.className === 'panel-left-btn') {
+    if (event.target.className === 'panel-left-btn') {
       p = p === 0 ? 3 : p;
-      p = Math.abs((p -= 1) % arrMode2.length);
-      myChart.data.datasets[0].data = [...Object.values(dataObj.timeline[arrMode2[p]])];
+      p = Math.abs((p -= 1) % arrayModeName.length);
+      myChart.data.datasets[0].data = [...Object.values(dataCovidObj.timeline[arrayModeName[p]])];
       myChart.update();
-      displayBlock.innerText = arrMode2[p];
+      displayBlock.innerText = arrayModeName[p];
     }
   });
   const valueCountry = e.path[1].lastChild.innerText;
   const url1 = `/v3/covid-19/historical/${valueCountry}?lastdays=all`;
   covidData(url1).then((res) => {
-    dataObj = res;
+    dataCovidObj = res;
     myChart.data.datasets[0].data = [...Object.values(res.timeline.cases)];
     myChart.update();
   });
@@ -158,10 +159,8 @@ function getCountyData(data, t) {
     flagCounry.setAttribute('src', dataSort[i].countryInfo.flag);
     if (modeTodayAt100) {
       spanCases.innerText = numberSeparator(Math.round((dataSort[i][modeNameStatus] * 100000)
-      // eslint-disable-next-line no-undef
         / (dataSort[i].population === 0 ? 1 : dataSort[i].population)));
     } else {
-      // eslint-disable-next-line dot-notation
       spanCases.innerText = numberSeparator(Math.round(dataSort[i][modeNameStatus] / one100people));
     }
     spanCounry.innerText = dataSort[i].country;
@@ -177,18 +176,18 @@ function getCountyData(data, t) {
   }
 }
 
-covidData(covid_all_url).then((res) => {
-  addDeads(res.cases);
+covidData(COVID_ALL_URL).then((res) => {
+  addDeathData(res.cases);
 });
 
-covidData(covid_countries_url).then((res) => {
+covidData(COVID_COUNTRIES_URL).then((res) => {
   getCountyData(res, countryUlConteiner);
 });
 
 async function showValue() {
   async function searchValue() {
     // eslint-disable-next-line no-unused-expressions
-    countries = await covidData(covid_countries_url).then((res) => res);
+    countries = await covidData(COVID_COUNTRIES_URL).then((res) => res);
   }
   await searchValue();
   countryUlConteiner.innerHTML = '';
@@ -219,7 +218,7 @@ checkbox.forEach((item) => {
       state.lastDayStat = e.target.checked;
     }
     countryUlConteiner.innerHTML = '';
-    await covidData(covid_countries_url).then((res) => {
+    await covidData(COVID_COUNTRIES_URL).then((res) => {
       getCountyData(res, countryUlConteiner);
     });
   });
