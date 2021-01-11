@@ -37,6 +37,7 @@ function createHTMLToolTip(country, parameter, cases, updateTime) {
           </ul>
       </span> 
     `;
+
   return html;
 }
 
@@ -104,14 +105,14 @@ createGeoJSON()
     const legend = L.control({ position: 'bottomright' });
 
     legend.onAdd = () => {
-      const div = L.DomUtil.create('div', 'info legend');
+      const legendBlock = L.DomUtil.create('div', 'info legend');
       const grades = [100, 1000, 10000, 100000, 1000000];
 
       for (let i = 0; i < grades.length; i += 1) {
-        div.innerHTML += `<div class="legend-list"><i class="i-marker" style="width:${(i + 1) * 3}px; height:${(i + 1) * 3}px">
+        legendBlock.innerHTML += `<div class="legend-list"><i class="i-marker" style="width:${(i + 1) * 3}px; height:${(i + 1) * 3}px">
         </i><span>${grades[i]} - ${(grades[i + 1] ? grades[i + 1] : 'more')}</span></div>`;
       }
-      return div;
+      return legendBlock;
     };
 
     legend.addTo(Map);

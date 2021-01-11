@@ -208,7 +208,7 @@ body {
     bottom: 100%;
     font-size: 1.4em;
     padding: 0.5em;
-    color: red;
+    color: #ec0303;
     border-radius: .4em;
     margin-bottom: 0.3em;
     box-shadow: 0 3px 5px rgba(black, .9);
@@ -216,7 +216,7 @@ body {
 
 .country-name {
     font-size: 1.2em;
-    color: black;
+    color: #17202A;
     line-height: 1.2;
     margin: 0 auto 0.1em;
 }
