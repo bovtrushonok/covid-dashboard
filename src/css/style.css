@@ -294,7 +294,6 @@ body {
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-
 }
 
 .last-day-disease-cases,
@@ -307,7 +306,6 @@ body {
 .statistic-type {
     font-size: 18px;
     color: #dee4e6;
-
 }
 
 .mode-switch {
@@ -329,7 +327,6 @@ body {
     margin-left: -5px;
     margin-top: 10px;
 }
-
 
 .mode-switch:hover {
     cursor: pointer;
@@ -384,23 +381,23 @@ body {
     width: 100%;
     height: 100%;
     z-index: 100;
-  }
+}
 
-  .full-screen-window .statistic-content {
+.full-screen-window .statistic-content {
     height: 45px;
     min-height: 165px;
-  }
+}
 
-  .full-screen-window .statistical-data {
+.full-screen-window .statistical-data {
     justify-content: flex-start;
     flex-direction: row;
     height: 45px;
     min-height: 45px;
-  }
+}
 
-  .full-screen-window .leaflet-container {
+.full-screen-window .leaflet-container {
       margin-left: -5px;
-  }
+}
 
 .no-scroll {
     overflow: hidden;
@@ -411,16 +408,17 @@ body {
     top: 0;
     z-index: 200;
 }
+
 .visible {
     visibility: visible;
 }
 
 .countries-list li {
-  display: flex;
-  justify-content: flex-start;
-  border-bottom: solid 1px #CDCDCD;
-  padding: 5px 0;
-  padding-left: 3px;
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: solid 1px #CDCDCD;
+    padding: 5px 0;
+    padding-left: 3px;
 }
 
 .countries-list li:hover {
@@ -429,87 +427,87 @@ body {
 }
 
 .countries-list li img {
-  width: 26px;
-  height: 16px;
-  margin-right: 5px;
+    width: 26px;
+    height: 16px;
+    margin-right: 5px;
 }
 
 .countries-list li span:nth-child(2) {
-  color: #ff0000;
-  font-size: 12px;
+    color: #ff0000;
+    font-size: 12px;
 }
 
 .countries-list li span:last-child {
-  color: #ffffff;
-  margin-left: 5px;
-  font-size: 12px;
+    color: #ffffff;
+    margin-left: 5px;
+    font-size: 12px;
 }
 
 .full-screen-window .countries-list li {
-  font-size: 22px;
+    font-size: 22px;
 }
 
 ::-webkit-scrollbar {
-  background-color: rgba(0, 0, 0, 0);
+     background-color: rgba(0, 0, 0, 0);
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 0;
+    border-radius: 0;
 }
 
 .main-container .full-screen-window {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  height: 100%;
-  z-index: 10;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 100%;
+    z-index: 10;
 }
 
 .main-container .full-screen-window {
-  font-size: 22px;
+    font-size: 22px;
 }
 
 .graphics-block canvas {
-  width: 100%;
-  height: auto;
-  padding: 5px;
-  box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    box-sizing: border-box;
 }
 
 .panel-control {
-  width: 60%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-around;
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
 }
 
 .panel-right-btn, .panel-left-btn {
-  width: 25px;
-  height: 25px;
-  cursor: pointer;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
 }
 
 .panel-right-btn {
-  background: linear-gradient(45deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 50%, #808080 50%);
-  transform: rotate(45deg);
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 50%, #808080 50%);
+    transform: rotate(45deg);
 }
 
 .panel-left-btn {
-  background: linear-gradient(45deg, #808080 0%, #808080 50%, rgba(255, 255, 255, 0) 50%);
-  transform: rotate(45deg);
+    background: linear-gradient(45deg, #808080 0%, #808080 50%, rgba(255, 255, 255, 0) 50%);
+    transform: rotate(45deg);
 }
 
 .search-input {
-  width: 90%;
-  background-color: #222;
-  color: #ffffff;
-  border-radius: 9px;
-  height: 30px;
-  margin: 2px;
-  padding-left: 5px;
-  font-size: 16px;
+    width: 90%;
+    background-color: #222;
+    color: #ffffff;
+    border-radius: 9px;
+    height: 30px;
+    margin: 2px;
+    padding-left: 5px;
+    font-size: 16px;
 }
 
 .leaflet-container {
@@ -523,7 +521,6 @@ footer {
     justify-content: center;
     margin-top: 3px;
     background: #222222;
-    
 }
 
 .footer-content {
@@ -540,9 +537,9 @@ footer {
 }
 
 .github-link {
-text-decoration: none;
-color: #ffffff;
-padding-bottom: 1px;
+    text-decoration: none;
+    color: #ffffff;
+    padding-bottom: 1px;
 }
 
 .github-link:hover {

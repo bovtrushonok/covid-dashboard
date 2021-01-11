@@ -17,12 +17,13 @@ const controlBtn = function createControlBtn(str) {
   rightBtn.classList.add('panel-right-btn');
   leftBtn.classList.add('panel-left-btn');
   display.classList.add('display-panel');
+
   control.append(leftBtn, display, rightBtn);
 
   return control;
 };
 
-const arrMode = ['deaths', 'cases', 'recovered'];
+const arrModeTypes = ['deaths', 'cases', 'recovered'];
 const covidDataBase = '/v3/covid-19/historical/all?lastdays=all';
 
 chartBlock.append(canvas, controlBtn('deads'));
@@ -30,6 +31,7 @@ chartBlock.append(canvas, controlBtn('deads'));
 async function getDataOnCovid(url) {
   const response = await fetch(`https://disease.sh${url}`);
   const result = await response.json();
+
   return result;
 }
 
@@ -77,33 +79,40 @@ function setData(data, name, color) {
     backgroundColor: color,
     fill: true,
   };
+
   return obj;
 }
 
 let dataObj = null;
+
 getDataOnCovid(covidDataBase).then((res) => {
   dataObj = res;
   arrData = Object.keys(res.cases).map((item) => new Date(item));
+
   myChart.data.labels = Object.keys(res.cases);
   myChart.data.datasets = [(setData(res.cases, 'cases', 'yellow'))];
   myChart.update();
 });
-let y = 0;
+
+let arrModeTypesIndex = 0;
 
 chartBlock.addEventListener('click', (e) => {
   const displayBlock = document.querySelector('.display-panel');
   if (e.target.className === 'panel-right-btn') {
-    y = (y += 1) % arrMode.length;
-    myChart.data.datasets = [setData(dataObj[arrMode[y]], arrMode[y], 'yellow')];
+    arrModeTypesIndex = (arrModeTypesIndex += 1) % arrModeTypes.length;
+
+    myChart.data.datasets = [setData(dataObj[arrModeTypes[arrModeTypesIndex]], arrModeTypes[arrModeTypesIndex], 'yellow')];
     myChart.update();
-    displayBlock.innerText = arrMode[y];
+    displayBlock.innerText = arrModeTypes[arrModeTypesIndex];
   }
+
   if (e.target.className === 'panel-left-btn') {
-    y = y === 0 ? arrMode.length : y;
-    y = Math.abs((y -= 1) % arrMode.length);
-    myChart.data.datasets = [setData(dataObj[arrMode[y]], arrMode[y], 'yellow')];
+    arrModeTypesIndex = arrModeTypesIndex === 0 ? arrModeTypes.length : arrModeTypesIndex;
+    arrModeTypesIndex = Math.abs((arrModeTypesIndex -= 1) % arrModeTypes.length);
+
+    myChart.data.datasets = [setData(dataObj[arrModeTypes[arrModeTypesIndex]], arrModeTypes[arrModeTypesIndex], 'yellow')];
     myChart.update();
-    displayBlock.innerText = arrMode[y];
+    displayBlock.innerText = arrModeTypes[arrModeTypesIndex];
   }
 });
 
