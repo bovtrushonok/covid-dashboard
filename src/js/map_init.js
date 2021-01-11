@@ -1,11 +1,9 @@
 import * as constants from './constants';
 
+const { L } = window;
 const mapSpreadIcon = document.querySelector('.map-container .spread-icon');
 const mapWindow = document.querySelector('.map-container');
 const pageBody = document.querySelector('body');
-
-const { L } = window;
-let geoJson;
 let casesLayer;
 let deathsLayer;
 let recoversLayer;
@@ -72,26 +70,6 @@ async function createGeoJSON() {
 }
 
 createGeoJSON()
-  .then((res) => {
-    geoJson = {
-      type: 'FeatureCollection',
-      features: res.map((countryData) => {
-        const latitude = countryData.countryInfo.lat;
-        const longitude = countryData.countryInfo.long;
-        return {
-          type: 'Feature',
-          properties: {
-            ...countryData,
-          },
-          geometry: {
-            type: 'Point',
-            coordinates: [longitude, latitude],
-          },
-        };
-      }),
-    };
-    return geoJson;
-  })
   .then((geojson) => {
     casesLayer = createGeoJsonLayer(geojson, 'cases', constants.LARGE_SCOPE_COEFFICIENT, 'Cases', 'yellow');
     casesLayer.addTo(Map);
@@ -105,6 +83,7 @@ createGeoJSON()
     deathsPer100kLayer = createGeoJsonLayer(geojson, 'deathsPerOneMillion', constants.EXTRASMALL_SCOPE_COEFFICIENT, 'Deaths per 100K', 'red');
     recoversPer100kLayer = createGeoJsonLayer(geojson, 'recoveredPerOneMillion', constants.SMALL_SCOPE_COEFFICIENT, 'Recovers per 100K', 'blue');
   })
+
   .then(() => {
     const overlays = {
       Cases: casesLayer,
@@ -120,6 +99,7 @@ createGeoJSON()
 
     L.control.layers(null, overlays).addTo(Map);
   })
+
   .then(() => {
     const legend = L.control({ position: 'bottomright' });
 
@@ -127,11 +107,10 @@ createGeoJSON()
       const div = L.DomUtil.create('div', 'info legend');
       const grades = [100, 1000, 10000, 100000, 1000000];
 
-      grades.forEach((grade, index) => {
-        div.insertAdjacentHTML('beforeend', `<div class="legend-list"><i class="i-marker" style="width:${(index + 1) * 3}px; height:${(index + 1) * 3}px">
-        </i><span>${grade} - ${(grades[index + 1] ? grades[index + 1] : 'more')}</span></div>`);
-      });
-
+      for (let i = 0; i < grades.length; i += 1) {
+        div.innerHTML += `<div class="legend-list"><i class="i-marker" style="width:${(i + 1) * 3}px; height:${(i + 1) * 3}px">
+        </i><span>${grades[i]} - ${(grades[i + 1] ? grades[i + 1] : 'more')}</span></div>`;
+      }
       return div;
     };
 
