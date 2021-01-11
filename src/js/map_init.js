@@ -1,3 +1,5 @@
+import * as constants from './constants';
+
 const mapSpreadIcon = document.querySelector('.map-container .spread-icon');
 const mapWindow = document.querySelector('.map-container');
 const pageBody = document.querySelector('body');
@@ -15,7 +17,7 @@ let deathsPer100kLayer;
 let recoversPer100kLayer;
 
 const baseLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  attribution: constants.ATTRIBUTION,
   maxZoom: 18,
   id: 'mapbox/dark-v10',
   tileSize: 512,
@@ -40,10 +42,32 @@ function createHTMLToolTip(country, parameter, cases, updateTime) {
   return html;
 }
 
+function createGeoJsonLayer(geojson, parameter, scopeCoefficient, parameterDescriptionString, col) {
+  return L.geoJSON(geojson, {
+    pointToLayer(feature, latlng) {
+      return L.circleMarker(latlng, {
+        radius: constants.BASIC_RADIUS_COEFFICIENT
+          * (feature.properties[parameter] / scopeCoefficient),
+        fillColor: col,
+        color: '#000',
+        weight: 1,
+        opacity: 0,
+        fillOpacity: 0.5,
+        riseOnHover: true,
+      });
+    },
+    onEachFeature(feature, layer) {
+      layer.bindTooltip(createHTMLToolTip(feature.properties.country, parameterDescriptionString,
+        feature.properties[parameter], feature.properties.updated));
+    },
+  });
+}
+
 async function createGeoJSON() {
   const response = await fetch('https://disease.sh/v3/covid-19/countries');
   const data = await response.text();
   const result = await JSON.parse(data);
+
   return result;
 }
 
@@ -69,160 +93,17 @@ createGeoJSON()
     return geoJson;
   })
   .then((geojson) => {
-    casesLayer = L.geoJSON(geojson, {
-      pointToLayer(feature, latlng) {
-        return L.circleMarker(latlng, {
-          radius: 0.09 * (feature.properties.cases / 10000),
-          fillColor: 'yellow',
-          color: '#000',
-          weight: 1,
-          opacity: 0,
-          fillOpacity: 0.5,
-          riseOnHover: true,
-        });
-      },
-      onEachFeature(feature, layer) {
-        layer.bindTooltip(createHTMLToolTip(feature.properties.country, 'Cases',
-          feature.properties.cases, feature.properties.updated));
-      },
-    });
+    casesLayer = createGeoJsonLayer(geojson, 'cases', constants.LARGE_SCOPE_COEFFICIENT, 'Cases', 'yellow');
     casesLayer.addTo(Map);
-    deathsLayer = L.geoJSON(geojson, {
-      pointToLayer(feature, latlng) {
-        return L.circleMarker(latlng, {
-          radius: 0.09 * (feature.properties.deaths / 1000),
-          fillColor: 'red',
-          color: '#000',
-          weight: 1,
-          opacity: 0,
-          fillOpacity: 0.5,
-          riseOnHover: true,
-        });
-      },
-      onEachFeature(feature, layer) {
-        layer.bindTooltip(createHTMLToolTip(feature.properties.country, 'Deaths',
-          feature.properties.deaths, feature.properties.updated));
-      },
-    });
-    recoversLayer = L.geoJSON(geojson, {
-      pointToLayer(feature, latlng) {
-        return L.circleMarker(latlng, {
-          radius: 0.09 * (feature.properties.recovered / 10000),
-          fillColor: 'blue',
-          color: '#000',
-          weight: 1,
-          opacity: 0,
-          fillOpacity: 0.5,
-          riseOnHover: true,
-        });
-      },
-      onEachFeature(feature, layer) {
-        layer.bindTooltip(createHTMLToolTip(feature.properties.country, 'Recovered',
-          feature.properties.recovered, feature.properties.updated));
-      },
-    });
-    todayCasesLayer = L.geoJSON(geojson, {
-      pointToLayer(feature, latlng) {
-        return L.circleMarker(latlng, {
-          radius: 0.09 * (feature.properties.todayCases / 100),
-          fillColor: 'yellow',
-          color: '#000',
-          weight: 1,
-          opacity: 0,
-          fillOpacity: 0.5,
-          riseOnHover: true,
-        });
-      },
-      onEachFeature(feature, layer) {
-        layer.bindTooltip(createHTMLToolTip(feature.properties.country, 'Cases today',
-          feature.properties.todayCases, feature.properties.updated));
-      },
-    });
-    todayRecoversLayer = L.geoJSON(geojson, {
-      pointToLayer(feature, latlng) {
-        return L.circleMarker(latlng, {
-          radius: 0.09 * (feature.properties.todayRecovered / 100),
-          fillColor: 'blue',
-          color: '#000',
-          weight: 1,
-          opacity: 0,
-          fillOpacity: 0.5,
-          riseOnHover: true,
-        });
-      },
-      onEachFeature(feature, layer) {
-        layer.bindTooltip(createHTMLToolTip(feature.properties.country, 'Recovered today',
-          feature.properties.todayRecovered, feature.properties.updated));
-      },
-    });
-    todayDeathsLayer = L.geoJSON(geojson, {
-      pointToLayer(feature, latlng) {
-        return L.circleMarker(latlng, {
-          radius: 0.09 * (feature.properties.todayDeaths / 10),
-          fillColor: 'red',
-          color: '#000',
-          weight: 1,
-          opacity: 0,
-          fillOpacity: 0.5,
-          riseOnHover: true,
-        });
-      },
-      onEachFeature(feature, layer) {
-        layer.bindTooltip(createHTMLToolTip(feature.properties.country, 'Deaths today',
-          feature.properties.todayDeaths, feature.properties.updated));
-      },
-    });
-    casesPer100kLayer = L.geoJSON(geojson, {
-      pointToLayer(feature, latlng) {
-        return L.circleMarker(latlng, {
-          radius: Math.trunc(0.1 * (feature.properties.casesPerOneMillion / 100)),
-          fillColor: 'yellow',
-          color: '#000',
-          weight: 1,
-          opacity: 0,
-          fillOpacity: 0.5,
-          riseOnHover: true,
-        });
-      },
-      onEachFeature(feature, layer) {
-        layer.bindTooltip(createHTMLToolTip(feature.properties.country, 'Cases per 100K',
-          feature.properties.casesPerOneMillion / 10, feature.properties.updated));
-      },
-    });
-    deathsPer100kLayer = L.geoJSON(geojson, {
-      pointToLayer(feature, latlng) {
-        return L.circleMarker(latlng, {
-          radius: Math.trunc(0.1 * (feature.properties.deathsPerOneMillion / 10)),
-          fillColor: 'red',
-          color: '#000',
-          weight: 1,
-          opacity: 0,
-          fillOpacity: 0.5,
-          riseOnHover: true,
-        });
-      },
-      onEachFeature(feature, layer) {
-        layer.bindTooltip(createHTMLToolTip(feature.properties.country, 'Deaths per 100K',
-          feature.properties.deathsPerOneMillion / 10, feature.properties.updated));
-      },
-    });
-    recoversPer100kLayer = L.geoJSON(geojson, {
-      pointToLayer(feature, latlng) {
-        return L.circleMarker(latlng, {
-          radius: Math.trunc(0.1 * (feature.properties.recoveredPerOneMillion / 100)),
-          fillColor: 'blue',
-          color: '#000',
-          weight: 1,
-          opacity: 0,
-          fillOpacity: 0.5,
-          riseOnHover: true,
-        });
-      },
-      onEachFeature(feature, layer) {
-        layer.bindTooltip(createHTMLToolTip(feature.properties.country, 'Recovers per 100K',
-          feature.properties.recoveredPerOneMillion / 10, feature.properties.updated));
-      },
-    });
+
+    deathsLayer = createGeoJsonLayer(geojson, 'deaths', constants.STANDARD_SCOPE_COEFFICIENT, 'Deaths', 'red');
+    recoversLayer = createGeoJsonLayer(geojson, 'recovered', constants.LARGE_SCOPE_COEFFICIENT, 'Recovers', 'blue');
+    todayCasesLayer = createGeoJsonLayer(geojson, 'todayCases', constants.SMALL_SCOPE_COEFFICIENT, 'Cases today', 'yellow');
+    todayRecoversLayer = createGeoJsonLayer(geojson, 'todayRecovered', constants.SMALL_SCOPE_COEFFICIENT, 'Recovers today', 'blue');
+    todayDeathsLayer = createGeoJsonLayer(geojson, 'todayDeaths', constants.EXTRASMALL_SCOPE_COEFFICIENT, 'Deaths today', 'red');
+    casesPer100kLayer = createGeoJsonLayer(geojson, 'casesPerOneMillion', constants.SMALL_SCOPE_COEFFICIENT, 'Cases per 100K', 'yellow');
+    deathsPer100kLayer = createGeoJsonLayer(geojson, 'deathsPerOneMillion', constants.EXTRASMALL_SCOPE_COEFFICIENT, 'Deaths per 100K', 'red');
+    recoversPer100kLayer = createGeoJsonLayer(geojson, 'recoveredPerOneMillion', constants.SMALL_SCOPE_COEFFICIENT, 'Recovers per 100K', 'blue');
   })
   .then(() => {
     const overlays = {
@@ -246,10 +127,11 @@ createGeoJSON()
       const div = L.DomUtil.create('div', 'info legend');
       const grades = [100, 1000, 10000, 100000, 1000000];
 
-      for (let i = 0; i < grades.length; i += 1) {
-        div.innerHTML += `<div class="legend-list"><i class="i-marker" style="width:${(i + 1) * 3}px; height:${(i + 1) * 3}px">
-          </i><span>${grades[i]} - ${(grades[i + 1] ? grades[i + 1] : 'more')}</span></div>`;
-      }
+      grades.forEach((grade, index) => {
+        div.insertAdjacentHTML('beforeend', `<div class="legend-list"><i class="i-marker" style="width:${(index + 1) * 3}px; height:${(index + 1) * 3}px">
+        </i><span>${grade} - ${(grades[index + 1] ? grades[index + 1] : 'more')}</span></div>`);
+      });
+
       return div;
     };
 
