@@ -1,0 +1,15 @@
+const BASIC_RADIUS_COEFFICIENT = 0.09;
+const LARGE_SCOPE_COEFFICIENT = 10000;
+const STANDARD_SCOPE_COEFFICIENT = 1000;
+const SMALL_SCOPE_COEFFICIENT = 100;
+const EXTRASMALL_SCOPE_COEFFICIENT = 10;
+const ATTRIBUTION = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
+
+export {
+  BASIC_RADIUS_COEFFICIENT,
+  LARGE_SCOPE_COEFFICIENT,
+  STANDARD_SCOPE_COEFFICIENT,
+  SMALL_SCOPE_COEFFICIENT,
+  EXTRASMALL_SCOPE_COEFFICIENT,
+  ATTRIBUTION,
+};
